@@ -1,0 +1,104 @@
+2022-04-30 17:53:59,482 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting GreenjokerquestbotApplication using Java 11.0.14 on DESKTOP-U6B0CBP with PID 14864 (C:\Users\93_vi\IdeaProjects\greenjokerbot\target\classes started by 93_vi in C:\Users\93_vi\IdeaProjects\greenjokerbot)
+2022-04-30 17:53:59,486 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2022-04-30 17:53:59,522 INFO org.springframework.boot.logging.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-04-30 17:53:59,522 INFO org.springframework.boot.logging.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-04-30 17:54:00,367 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2022-04-30 17:54:00,377 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2022-04-30 17:54:00,378 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2022-04-30 17:54:00,378 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.62]
+2022-04-30 17:54:00,563 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2022-04-30 17:54:00,564 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1041 ms
+2022-04-30 17:54:01,243 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2022-04-30 17:54:02,899 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2022-04-30 17:54:02,927 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2022-04-30 17:54:02,961 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started GreenjokerquestbotApplication in 3.789 seconds (JVM running for 4.891)
+2022-04-30 18:08:30,200 ERROR org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread [GreenJokerEn_bot Telegram Executor] null
+java.lang.NullPointerException: null
+	at by.semashko.greenjokerquestbot.bot.UpdateReceiver.handleUpdate(UpdateReceiver.java:45)
+	at by.semashko.greenjokerquestbot.bot.GJBot.onUpdateReceived(GJBot.java:44)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:317)
+2022-04-30 18:13:05,931 ERROR org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread [GreenJokerEn_bot Telegram Executor] null
+java.lang.NullPointerException: null
+	at by.semashko.greenjokerquestbot.bot.UpdateReceiver.handleUpdate(UpdateReceiver.java:45)
+	at by.semashko.greenjokerquestbot.bot.GJBot.onUpdateReceived(GJBot.java:44)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:317)
+2022-04-30 18:16:23,489 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting GreenjokerquestbotApplication using Java 11.0.14 on DESKTOP-U6B0CBP with PID 4356 (C:\Users\93_vi\IdeaProjects\greenjokerbot\target\classes started by 93_vi in C:\Users\93_vi\IdeaProjects\greenjokerbot)
+2022-04-30 18:16:23,492 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2022-04-30 18:16:23,532 INFO org.springframework.boot.logging.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-04-30 18:16:23,533 INFO org.springframework.boot.logging.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-04-30 18:16:24,345 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2022-04-30 18:16:24,352 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2022-04-30 18:16:24,353 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2022-04-30 18:16:24,353 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.62]
+2022-04-30 18:16:24,450 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2022-04-30 18:16:24,450 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 917 ms
+2022-04-30 18:16:25,151 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2022-04-30 18:16:26,790 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2022-04-30 18:16:26,819 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2022-04-30 18:16:26,832 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started GreenjokerquestbotApplication in 3.69 seconds (JVM running for 4.638)
+2022-04-30 18:21:09,233 ERROR org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread [GreenJokerEn_bot Telegram Executor] null
+java.lang.NullPointerException: null
+	at by.semashko.greenjokerquestbot.bot.UpdateReceiver.handleUpdate(UpdateReceiver.java:45)
+	at by.semashko.greenjokerquestbot.bot.GJBot.onUpdateReceived(GJBot.java:44)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:317)
+2022-04-30 18:26:50,932 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting GreenjokerquestbotApplication using Java 11.0.14 on DESKTOP-U6B0CBP with PID 15084 (C:\Users\93_vi\IdeaProjects\greenjokerbot\target\classes started by 93_vi in C:\Users\93_vi\IdeaProjects\greenjokerbot)
+2022-04-30 18:26:50,935 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2022-04-30 18:26:50,977 INFO org.springframework.boot.logging.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-04-30 18:26:50,977 INFO org.springframework.boot.logging.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-04-30 18:26:52,038 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2022-04-30 18:26:52,046 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2022-04-30 18:26:52,047 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2022-04-30 18:26:52,047 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.62]
+2022-04-30 18:26:52,158 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2022-04-30 18:26:52,158 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1180 ms
+2022-04-30 18:26:52,937 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2022-04-30 18:26:54,439 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2022-04-30 18:26:54,459 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2022-04-30 18:26:54,473 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started GreenjokerquestbotApplication in 3.933 seconds (JVM running for 6.167)
+2022-04-30 18:28:24,818 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting GreenjokerquestbotApplication using Java 11.0.14 on DESKTOP-U6B0CBP with PID 5964 (C:\Users\93_vi\IdeaProjects\greenjokerbot\target\classes started by 93_vi in C:\Users\93_vi\IdeaProjects\greenjokerbot)
+2022-04-30 18:28:24,821 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2022-04-30 18:28:24,856 INFO org.springframework.boot.logging.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-04-30 18:28:24,856 INFO org.springframework.boot.logging.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-04-30 18:28:25,753 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2022-04-30 18:28:25,762 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2022-04-30 18:28:25,763 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2022-04-30 18:28:25,763 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.62]
+2022-04-30 18:28:25,865 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2022-04-30 18:28:25,865 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1008 ms
+2022-04-30 18:28:26,473 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2022-04-30 18:28:28,158 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2022-04-30 18:28:28,183 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2022-04-30 18:28:28,200 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started GreenjokerquestbotApplication in 3.674 seconds (JVM running for 4.555)
+2022-04-30 18:58:28,467 ERROR org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread [GreenJokerEn_bot Telegram Connection] Connection reset
+java.net.SocketException: Connection reset
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:186)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:478)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.bytesInCompletePacket(SSLSocketInputRecord.java:70)
+	at java.base/sun.security.ssl.SSLSocketImpl.readApplicationRecord(SSLSocketImpl.java:1328)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:971)
+	at org.apache.http.impl.io.SessionInputBufferImpl.streamRead(SessionInputBufferImpl.java:137)
+	at org.apache.http.impl.io.SessionInputBufferImpl.fillBuffer(SessionInputBufferImpl.java:153)
+	at org.apache.http.impl.io.SessionInputBufferImpl.readLine(SessionInputBufferImpl.java:280)
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:138)
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:56)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:259)
+	at org.apache.http.impl.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:163)
+	at org.apache.http.impl.conn.CPoolProxy.receiveResponseHeader(CPoolProxy.java:157)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:273)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:272)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:250)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:189)
