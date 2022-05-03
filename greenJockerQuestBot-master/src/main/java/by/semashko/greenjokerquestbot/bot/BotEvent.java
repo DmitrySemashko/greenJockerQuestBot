@@ -4,5 +4,6 @@ public enum BotEvent {
 
     MENU,
     HELP,
-    SETTING
+    SETTING,
+    ENTER_CODE
 }
