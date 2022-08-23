@@ -45,8 +45,11 @@ public class Level {
     private List<Message> messages;
     @SerializedName("Task")
     private Task task;
+    @SerializedName("Helps")
     private List<Help> helps;
+    @SerializedName("PenaltyHelps")
     private List<PenaltyHelp> penaltyHelps;
+    @SerializedName("Bonuses")
     private List<Bonus> bonuses;
 
 }
