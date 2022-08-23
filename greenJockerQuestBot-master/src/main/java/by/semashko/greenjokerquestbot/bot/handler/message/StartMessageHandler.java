@@ -33,7 +33,7 @@ public class StartMessageHandler implements MessageHandler {
 
     private SendMessage getMenu(String chatId){
         return ReplyKeyboardMarkupBuilder.create(chatId)
-                .setText("Добро пожаловать! Выбирите игровую зону" )
+                .setText("Добро пожаловать! " )
                 .row()
                 .button("en.cx")
                 .endRow()

@@ -57,16 +57,11 @@ public class UpdateReceiver {
             case "/help":
                 botEvent = BotEvent.HELP;
                 break;
-            case "en.cx" :
-                botEvent = BotEvent.SETTING;
-                break;
-            case "/" :
-                botEvent = BotEvent.ENTER_CODE;
-                break;
             default:
                 botEvent = eventUserContext.getCurrentEventForUserById(userId);
         }
         eventUserContext.setCurrentEventUserWithId(userId, botEvent);
         return botEvent;
     }
+
 }

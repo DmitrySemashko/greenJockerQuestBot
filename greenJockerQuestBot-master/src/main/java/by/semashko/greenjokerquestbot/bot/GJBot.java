@@ -1,6 +1,5 @@
 package by.semashko.greenjokerquestbot.bot;
 
-import by.semashko.greenjokerquestbot.model.EngineSessionInfo;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

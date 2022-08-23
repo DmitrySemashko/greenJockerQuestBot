@@ -1,7 +1,6 @@
 package by.semashko.greenjokerquestbot.bot.handler;
 
 import by.semashko.greenjokerquestbot.bot.BotEvent;
-import by.semashko.greenjokerquestbot.bot.GJBot;
 import by.semashko.greenjokerquestbot.bot.handler.message.MessageHandler;
 import by.semashko.greenjokerquestbot.exception.NoHandlerFoundException;
 import by.semashko.greenjokerquestbot.service.ReplyMessageService;

@@ -20,7 +20,7 @@ public class ReplyMessageService {
         AnswerCallbackQuery callbackQuery = new AnswerCallbackQuery();
         callbackQuery.setCallbackQueryId(callbackId);
         callbackQuery.setUrl(text);
-        callbackQuery.setShowAlert(true);
+        callbackQuery.setShowAlert(false);
         return callbackQuery;
     }
 }
