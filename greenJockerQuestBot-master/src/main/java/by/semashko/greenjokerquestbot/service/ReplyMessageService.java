@@ -23,4 +23,11 @@ public class ReplyMessageService {
         callbackQuery.setShowAlert(false);
         return callbackQuery;
     }
+    public AnswerCallbackQuery getTextAnswer(String callbackId, String text){
+        AnswerCallbackQuery callbackQuery = new AnswerCallbackQuery();
+        callbackQuery.setCallbackQueryId(callbackId);
+        callbackQuery.setText(text);
+        callbackQuery.setShowAlert(false);
+        return callbackQuery;
+    }
 }

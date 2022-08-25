@@ -3,7 +3,10 @@ package by.semashko.greenjokerquestbot.bot;
 import by.semashko.greenjokerquestbot.bot.handler.BotEventHandler;
 import by.semashko.greenjokerquestbot.bot.handler.callbackquery.CallbackQueryHandler;
 import by.semashko.greenjokerquestbot.service.ReplyMessageService;
+import lombok.Data;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
@@ -13,18 +16,19 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import java.io.Serializable;
 
 @Slf4j
+@Data
 @Component
 public class UpdateReceiver {
 
-    private final BotEventHandler eventHandler;
+    private  BotEventHandler eventHandler;
 
-    private final BotEventUserContext eventUserContext;
+    private  BotEventUserContext eventUserContext;
 
-    private final ReplyMessageService replyMessageService;
+    private  ReplyMessageService replyMessageService;
 
-    private final CallbackQueryHandler callbackQueryHandler;
+    private  CallbackQueryHandler callbackQueryHandler;
 
-
+    @Autowired
     public UpdateReceiver(BotEventHandler eventHandler, BotEventUserContext eventUserContext, ReplyMessageService replyMessageService, CallbackQueryHandler callbackQueryHandler) {
         this.eventHandler = eventHandler;
         this.eventUserContext = eventUserContext;
@@ -56,6 +60,9 @@ public class UpdateReceiver {
                 break;
             case "/help":
                 botEvent = BotEvent.HELP;
+                break;
+            case "Регистрация игры" :
+                botEvent = BotEvent.SETTING;
                 break;
             default:
                 botEvent = eventUserContext.getCurrentEventForUserById(userId);

@@ -28,6 +28,9 @@ public class SettingBotCallbackQueryHandler implements CallbackQueryHandler {
         String callbackId = callbackQuery.getId();
         Long chatId = callbackQuery.getMessage().getChatId();
 
-        return callbackData.equals("/add") ? messageService.getPopUpAnswer(callbackId,URL) : messageService.getTextMessage(chatId.toString(),"fail");
+        if ("/add".equals(callbackData)) {
+            return messageService.getPopUpAnswer(callbackId, URL);
+        }
+        return messageService.getTextMessage(String.valueOf(chatId),"fail");
     }
 }

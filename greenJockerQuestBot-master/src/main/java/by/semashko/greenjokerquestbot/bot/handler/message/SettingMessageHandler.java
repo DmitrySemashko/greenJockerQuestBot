@@ -25,11 +25,13 @@ public class SettingMessageHandler implements MessageHandler {
     @Override
     public BotApiMethod<Message> handle(Message message) {
 
-        if (message.getText().equals("en.cx")){
-            return messageService.getTextMessage(message.getChatId().toString(),"Введите ссылку на игру");
-        }else {
-            return messageService.getTextMessage(message.getChatId().toString(),"Функция еще не реализована");
+
+
+        if (message.getText().equals("Регистрация игры")){
+            return messageService.getTextMessage(message.getChatId().toString(), "Введите ссылку на игру");
         }
+
+       return null;
 
     }
 
