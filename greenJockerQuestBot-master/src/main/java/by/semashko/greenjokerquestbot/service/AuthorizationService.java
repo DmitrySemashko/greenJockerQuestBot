@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -19,7 +20,7 @@ public class AuthorizationService {
 
     private static final String KEY_PASSWORD = "Password";
 
-    private Map<String,String> loginAndPassword;
+    private Map<String,String> loginAndPassword = new HashMap<>();
 
     private ApiEngineInterface apiEngineInterface;
 

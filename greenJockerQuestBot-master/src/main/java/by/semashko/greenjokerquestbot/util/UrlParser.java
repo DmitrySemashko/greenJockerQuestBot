@@ -5,12 +5,12 @@ import by.semashko.greenjokerquestbot.exception.InvalidUrlException;
 public class UrlParser {
 
     private static final String DOMAIN_ZONE = "en.cx/";
-    private static final String PROTOCOL = "https://";
+    private static final String PROTOCOL = "http://";
     private static final String PATH = "/GameDetails.aspx?gid=";
 
     public static String getDomain(String url) {
         if (isValidUrl(url)){
-            return url.substring(0,nthIndexOf(url));
+            return url.substring(0,nthIndexOf(url)+1);
         }else {
             throw new InvalidUrlException("Не верный URL адрес");
         }
