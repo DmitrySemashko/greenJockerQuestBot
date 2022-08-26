@@ -59,13 +59,12 @@ public class SettingMessageHandler implements MessageHandler {
             if (response.getError() != 0){
                 return messageService.getTextMessage(message.getChatId().toString(),response.getMessage());
             }else {
-
+                return getButtonAddToChat(message.getChatId());
             }
 
         }catch (InvalidUrlException | IOException e){
             return messageService.getTextMessage(message.getChatId().toString(),e.getMessage());
         }
-        return null;
     }
 
 
@@ -73,7 +72,7 @@ public class SettingMessageHandler implements MessageHandler {
 
     private SendMessage getButtonAddToChat(Long chatId){
         return InlineKeyboardMarkupBuilder.create(chatId)
-                .setText("add to chat")
+                .setText("Добавить бота в чат")
                 .row()
                 .buttonWithURL("add to chat", "https://t.me/GreenJokerEn_bot?startgroup=XXXX")
                 .endRow()
