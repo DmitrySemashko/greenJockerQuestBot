@@ -1,8 +1,8 @@
 package by.semashko.greenjokerquestbot.rest;
 
 
-import by.semashko.greenjokerquestbot.model.AuthorizationResponse;
-import by.semashko.greenjokerquestbot.model.GameEngineModel;
+import by.semashko.greenjokerquestbot.domain.model.AuthorizationResponse;
+import by.semashko.greenjokerquestbot.domain.model.GameEngineModel;
 import retrofit2.Call;
 import retrofit2.http.*;
 

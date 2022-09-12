@@ -9,22 +9,22 @@ public class UrlParser {
     private static final String PATH = "/GameDetails.aspx?gid=";
 
     public static String getDomain(String url) {
-        if (isValidUrl(url)){
-            return url.substring(0,nthIndexOf(url)+1);
-        }else {
+        if (isValidUrl(url)) {
+            return url.substring(0, nthIndexOf(url) + 1);
+        } else {
             throw new InvalidUrlException("Не верный URL адрес");
         }
     }
 
-    public static int getIdGame(String url){
+    public static int getIdGame(String url) {
         if (isValidUrl(url)) {
-            return Integer.parseInt(url.substring(url.lastIndexOf("=")+1));
+            return Integer.parseInt(url.substring(url.lastIndexOf("=") + 1));
         }
         return -1;
     }
 
-    private static boolean isValidUrl(String url){
-        return url.startsWith(PROTOCOL)&&url.contains(DOMAIN_ZONE)&&url.contains(PATH);
+    private static boolean isValidUrl(String url) {
+        return url.startsWith(PROTOCOL) && url.contains(DOMAIN_ZONE) && url.contains(PATH);
     }
 
     private static int nthIndexOf(String string) {

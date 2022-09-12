@@ -36,7 +36,7 @@ public class StartMessageHandler implements MessageHandler {
 
     private SendMessage getMenu(String chatId){
         return ReplyKeyboardMarkupBuilder.create(chatId)
-                .setText("Воспользуйтусь меню")
+                .setText("Воспользуйтесь меню")
                 .row()
                 .button("Регистрация игры")
                 .endRow()

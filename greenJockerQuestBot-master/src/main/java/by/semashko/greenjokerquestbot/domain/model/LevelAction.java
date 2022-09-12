@@ -1,4 +1,4 @@
-package by.semashko.greenjokerquestbot.model;
+package by.semashko.greenjokerquestbot.domain.model;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
