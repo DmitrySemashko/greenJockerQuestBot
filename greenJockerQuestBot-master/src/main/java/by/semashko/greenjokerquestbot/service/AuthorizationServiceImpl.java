@@ -1,8 +1,11 @@
 package by.semashko.greenjokerquestbot.service;
 
 import by.semashko.greenjokerquestbot.domain.model.AuthorizationResponse;
-import by.semashko.greenjokerquestbot.rest.Authorization;
-import lombok.Data;
+import by.semashko.greenjokerquestbot.rest.RestAPI;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -10,13 +13,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@Data
+@AllArgsConstructor(onConstructor = @__ (@Autowired))
 public class AuthorizationServiceImpl implements AuthorizationService {
 
     private static final String LOGIN = "Login";
     private static final String PASSWORD = "Password";
 
-    private Authorization authorization;
+    @Getter
+    @Setter
+    private RestAPI authorization;
 
     @Override
     public AuthorizationResponse authorization(String domain, String message) throws IOException {

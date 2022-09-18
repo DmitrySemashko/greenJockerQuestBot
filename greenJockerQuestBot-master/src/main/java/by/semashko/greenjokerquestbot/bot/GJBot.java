@@ -1,5 +1,7 @@
 package by.semashko.greenjokerquestbot.bot;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,8 +14,10 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.Serializable;
 
+@EqualsAndHashCode(callSuper = true)
 @Slf4j
 @Component
+@Data
 public class GJBot extends TelegramLongPollingBot {
 
     @Getter

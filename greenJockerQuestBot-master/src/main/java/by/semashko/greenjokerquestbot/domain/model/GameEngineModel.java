@@ -30,7 +30,7 @@ public class GameEngineModel {
     @SerializedName("Levels")
     private List<Level> levels;
     @SerializedName("GameDateTimeStart")
-    private LocalDateTime gameDateTimeStart;
+    private String gameDateTimeStart;
     @SerializedName("Login")
     private String login;
     @SerializedName("TeamName")

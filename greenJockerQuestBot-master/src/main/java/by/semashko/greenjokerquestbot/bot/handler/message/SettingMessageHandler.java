@@ -2,12 +2,16 @@ package by.semashko.greenjokerquestbot.bot.handler.message;
 
 import by.semashko.greenjokerquestbot.bot.BotEvent;
 import by.semashko.greenjokerquestbot.bot.keyboard.InlineKeyboardMarkupBuilder;
-import by.semashko.greenjokerquestbot.exception.InvalidUrlException;
+import by.semashko.greenjokerquestbot.domain.enums.StateGame;
 import by.semashko.greenjokerquestbot.domain.model.AuthorizationResponse;
+import by.semashko.greenjokerquestbot.exception.InvalidUrlException;
 import by.semashko.greenjokerquestbot.service.AuthorizationServiceImpl;
+import by.semashko.greenjokerquestbot.service.CheckGameState;
 import by.semashko.greenjokerquestbot.service.ReplyMessageService;
 import by.semashko.greenjokerquestbot.util.UrlParser;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,16 +22,22 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import java.io.IOException;
 
 @Slf4j
-@Data
+@AllArgsConstructor(onConstructor = @__ (@Autowired))
+@Getter
+@Setter
 @Component
 public class SettingMessageHandler implements MessageHandler {
 
-    @Autowired
+
     private ReplyMessageService messageService;
-    @Autowired
+
     private AuthorizationServiceImpl authorizationService;
 
+    private CheckGameState checkGameState;
+
     private static String domain = null;
+
+    private static int gameId = 0;
 
 
     public boolean canHandle(BotEvent event) {
@@ -43,6 +53,8 @@ public class SettingMessageHandler implements MessageHandler {
         try {
             if (domain == null) {
                 domain = UrlParser.getDomain(message.getText());
+                gameId = UrlParser.getIdGame(message.getText());
+                log.info(Integer.toString(gameId));
                 log.info(domain);
                 return messageService.getTextMessage(message.getChatId().toString(), "Ввдите логин и пароль через пробел");
             }
@@ -51,8 +63,15 @@ public class SettingMessageHandler implements MessageHandler {
 
             if (response.getError() != 0) {
                 return messageService.getTextMessage(message.getChatId().toString(), response.getMessage());
-            } else {
+            }
+
+
+            StateGame stateGame = checkGameState.getStateGame(domain, gameId);
+
+            if (stateGame == StateGame.ACTIVE || stateGame == StateGame.GAME_NOT_START){
                 return getButtonAddToChat(message.getChatId());
+            }else {
+                return messageService.getTextMessage(message.getChatId().toString(),stateGame.getDescription());
             }
 
         } catch (InvalidUrlException | IOException e) {
