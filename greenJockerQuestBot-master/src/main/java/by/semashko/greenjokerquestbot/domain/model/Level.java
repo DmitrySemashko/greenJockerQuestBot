@@ -40,7 +40,7 @@ public class Level {
     @SerializedName("SectorsLeftToClose ")
     private int sectorsLeftToClose;
     @SerializedName("MixedActions")
-    private MixedActions mixedActions;
+    private List<MixedActions> mixedActions;
     @SerializedName("Messages")
     private List<Message> messages;
     @SerializedName("Task")
