@@ -1,8 +1,8 @@
-package by.semashko.greenjokerquestbot.service;
+package by.semashko.greenjokerquestbot.infrastructure.service;
 
 import by.semashko.greenjokerquestbot.domain.enums.StateGame;
 import by.semashko.greenjokerquestbot.domain.model.GameEngineModel;
-import by.semashko.greenjokerquestbot.rest.RestAPI;
+import by.semashko.greenjokerquestbot.infrastructure.rest.RestAPI;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;

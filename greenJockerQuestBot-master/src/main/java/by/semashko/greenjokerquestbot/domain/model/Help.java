@@ -1,4 +1,4 @@
 package by.semashko.greenjokerquestbot.domain.model;
 
-public class Help {
+public class Help extends PenaltyHelp {
 }

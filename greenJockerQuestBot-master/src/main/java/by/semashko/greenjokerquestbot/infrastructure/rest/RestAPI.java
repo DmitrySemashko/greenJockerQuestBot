@@ -1,4 +1,4 @@
-package by.semashko.greenjokerquestbot.rest;
+package by.semashko.greenjokerquestbot.infrastructure.rest;
 
 import by.semashko.greenjokerquestbot.domain.model.AuthorizationResponse;
 import by.semashko.greenjokerquestbot.domain.model.GameEngineModel;

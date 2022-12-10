@@ -2,7 +2,7 @@ package by.semashko.greenjokerquestbot.bot.handler.message;
 
 import by.semashko.greenjokerquestbot.bot.BotEvent;
 import by.semashko.greenjokerquestbot.bot.keyboard.ReplyKeyboardMarkupBuilder;
-import by.semashko.greenjokerquestbot.service.ReplyMessageService;
+import by.semashko.greenjokerquestbot.infrastructure.service.ReplyMessageService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,12 +15,11 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 @Component
 @Setter
 @Getter
-@AllArgsConstructor(onConstructor = @__ (@Autowired))
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class StartMessageHandler implements MessageHandler {
 
 
-    private  ReplyMessageService messageService;
-
+    private ReplyMessageService messageService;
 
 
     @Override
@@ -31,10 +30,10 @@ public class StartMessageHandler implements MessageHandler {
     @Override
     public BotApiMethod<Message> handle(Message message) {
         return message.getText().equals("/start")
-                ? getMenu(message.getFrom().getId().toString()) : messageService.getTextMessage(message.getChatId().toString(),"Погнали");
+                ? getMenu(message.getFrom().getId().toString()) : messageService.getTextMessage(message.getChatId().toString(), "Погнали");
     }
 
-    private SendMessage getMenu(String chatId){
+    private SendMessage getMenu(String chatId) {
         return ReplyKeyboardMarkupBuilder.create(chatId)
                 .setText("Воспользуйтесь меню")
                 .row()

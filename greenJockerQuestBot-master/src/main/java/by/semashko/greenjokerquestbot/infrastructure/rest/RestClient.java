@@ -1,4 +1,4 @@
-package by.semashko.greenjokerquestbot.rest;
+package by.semashko.greenjokerquestbot.infrastructure.rest;
 
 import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;

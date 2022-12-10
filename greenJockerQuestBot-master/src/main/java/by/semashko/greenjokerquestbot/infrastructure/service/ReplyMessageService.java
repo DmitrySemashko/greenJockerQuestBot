@@ -1,4 +1,4 @@
-package by.semashko.greenjokerquestbot.service;
+package by.semashko.greenjokerquestbot.infrastructure.service;
 
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
