@@ -13,29 +13,22 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 @Service
-@AllArgsConstructor(onConstructor = @__ (@Autowired))
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Getter
 public class CheckGameState {
 
     private final RestAPI api;
 
     public StateGame getStateGame(String url, int id) throws IOException {
-        GameEngineModel model = api.checkStateGame(url,id);
+        GameEngineModel model = api.checkStateGame(url, id);
         return setStateGames(model.getEvent());
 
     }
 
-    public StateGame asyncWatchGameState(String url, int id){
-
-        return null;
-    }
-
     public StateGame setStateGames(int event) {
         return Arrays.stream(StateGame.values())
-                .filter(s -> s.getNumberError()== event)
+                .filter(s -> s.getNumberError() == event)
                 .findAny()
                 .orElseThrow(NoSuchElementException::new);
     }
-
-
 }

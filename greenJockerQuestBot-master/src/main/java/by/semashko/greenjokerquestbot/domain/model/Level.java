@@ -49,6 +49,8 @@ public class Level {
     private List<Help> helps;
     @SerializedName("PenaltyHelps")
     private List<PenaltyHelp> penaltyHelps;
+    @SerializedName("Sectors")
+    private List<Sector> sectors;
     @SerializedName("Bonuses")
     private List<Bonus> bonuses;
 

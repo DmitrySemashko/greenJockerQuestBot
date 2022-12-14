@@ -5,7 +5,7 @@ import by.semashko.greenjokerquestbot.bot.keyboard.InlineKeyboardMarkupBuilder;
 import by.semashko.greenjokerquestbot.domain.enums.StateGame;
 import by.semashko.greenjokerquestbot.domain.model.AuthorizationResponse;
 import by.semashko.greenjokerquestbot.exception.InvalidUrlException;
-import by.semashko.greenjokerquestbot.infrastructure.service.AuthorizationServiceImpl;
+import by.semashko.greenjokerquestbot.infrastructure.service.AuthorizationService;
 import by.semashko.greenjokerquestbot.infrastructure.service.CheckGameState;
 import by.semashko.greenjokerquestbot.infrastructure.service.ReplyMessageService;
 import by.semashko.greenjokerquestbot.util.UrlParser;
@@ -31,7 +31,7 @@ public class SettingMessageHandler implements MessageHandler {
 
     private ReplyMessageService messageService;
 
-    private AuthorizationServiceImpl authorizationService;
+    private AuthorizationService authorizationService;
 
     private CheckGameState checkGameState;
 

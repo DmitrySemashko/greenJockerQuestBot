@@ -2,7 +2,6 @@ package by.semashko.greenjokerquestbot.domain.enums;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public enum StateGame {
     ACTIVE(0,""),
