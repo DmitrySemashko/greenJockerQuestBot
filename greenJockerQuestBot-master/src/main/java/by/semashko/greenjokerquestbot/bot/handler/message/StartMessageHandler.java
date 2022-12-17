@@ -1,6 +1,7 @@
 package by.semashko.greenjokerquestbot.bot.handler.message;
 
 import by.semashko.greenjokerquestbot.bot.BotEvent;
+import by.semashko.greenjokerquestbot.bot.handler.Handler;
 import by.semashko.greenjokerquestbot.bot.keyboard.ReplyKeyboardMarkupBuilder;
 import by.semashko.greenjokerquestbot.infrastructure.service.ReplyMessageService;
 import lombok.AllArgsConstructor;
@@ -12,11 +13,13 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
+import java.io.Serializable;
+
 @Component
 @Setter
 @Getter
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class StartMessageHandler implements MessageHandler {
+public class StartMessageHandler implements Handler<Message> {
 
 
     private ReplyMessageService messageService;
@@ -28,7 +31,7 @@ public class StartMessageHandler implements MessageHandler {
     }
 
     @Override
-    public BotApiMethod<Message> handle(Message message) {
+    public BotApiMethod<? extends Serializable> handle(Message message) {
         return message.getText().equals("/start")
                 ? getMenu(message.getFrom().getId().toString()) : messageService.getTextMessage(message.getChatId().toString(), "Погнали");
     }

@@ -28,7 +28,6 @@ public class UpdateReceiver {
     private CallbackQueryHandler callbackQueryHandler;
 
 
-
     @Autowired
     public UpdateReceiver(BotEventHandler eventHandler, BotEventUserContext eventUserContext, ReplyMessageService replyMessageService, CallbackQueryHandler callbackQueryHandler) {
         this.eventHandler = eventHandler;
@@ -41,13 +40,17 @@ public class UpdateReceiver {
         if (update.hasMessage() && update.getMessage().hasText()) {
             Message message = update.getMessage();
             BotEvent event = getBotCondition(message);
-            return eventHandler.handleTextMessageByEvent(message, event);
+            if (event != null) {
+                return eventHandler.handleTextMessageByEvent(message, event);
+            }else {
+                return replyMessageService.leaveChat(update.getMessage().getChatId().toString());
+            }
         } else if (update.hasCallbackQuery()) {
             CallbackQuery callbackQuery = update.getCallbackQuery();
 
             return callbackQueryHandler.handleCallbackQuery(callbackQuery);
         }
-        return replyMessageService.getTextMessage(update.getMessage().getChatId().toString(), "ebok");
+        return replyMessageService.leaveChat(update.getMessage().getChatId().toString());
     }
 
     private BotEvent getBotCondition(Message message) {
@@ -66,7 +69,7 @@ public class UpdateReceiver {
             case "Регистрация игры":
                 botEvent = BotEvent.SETTING;
                 break;
-            case "/start@GreenJokerEn_bot" :
+            case "/start@GreenJokerEn_bot":
                 botEvent = message.getChat().isGroupChat() ? BotEvent.START_GAME_SESSION : BotEvent.MENU;
                 break;
             default:

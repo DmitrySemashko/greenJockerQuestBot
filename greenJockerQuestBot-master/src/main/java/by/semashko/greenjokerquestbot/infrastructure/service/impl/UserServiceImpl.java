@@ -1,6 +1,7 @@
 package by.semashko.greenjokerquestbot.infrastructure.service.impl;
 
 import by.semashko.greenjokerquestbot.domain.persistence.UserRepository;
+import by.semashko.greenjokerquestbot.domain.persistence.entity.Game;
 import by.semashko.greenjokerquestbot.domain.persistence.entity.User;
 import by.semashko.greenjokerquestbot.infrastructure.service.UserService;
 import lombok.AllArgsConstructor;
@@ -14,8 +15,16 @@ public class UserServiceImpl implements UserService {
     private final UserRepository repository;
 
     @Override
-    public void save(User user) {
+    public boolean save(String telegramChatId, Game game) {
+        User user = repository.findByTelegramId(telegramChatId);
+        if (user != null){
+            return false;
+        }
+        user = new User();
+        user.setTelegramId(telegramChatId);
+        user.setGame(game);
         repository.save(user);
+        return true;
     }
 
     @Override
