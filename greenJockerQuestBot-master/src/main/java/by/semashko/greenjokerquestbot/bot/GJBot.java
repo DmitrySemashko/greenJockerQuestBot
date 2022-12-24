@@ -20,10 +20,10 @@ import java.io.Serializable;
 @Data
 public class GJBot extends TelegramLongPollingBot {
 
-    @Getter
+
     @Value("${bot.username}")
     private String botUsername;
-    @Getter
+
     @Value("${bot.token}")
     private String botToken;
 

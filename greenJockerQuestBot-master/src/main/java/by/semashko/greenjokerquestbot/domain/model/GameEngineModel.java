@@ -3,7 +3,6 @@ package by.semashko.greenjokerquestbot.domain.model;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data

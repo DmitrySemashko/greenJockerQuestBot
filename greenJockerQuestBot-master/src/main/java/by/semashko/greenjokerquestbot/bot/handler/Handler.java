@@ -1,12 +1,14 @@
-package by.semashko.greenjokerquestbot.bot.handler.message;
+package by.semashko.greenjokerquestbot.bot.handler;
 
 import by.semashko.greenjokerquestbot.bot.BotEvent;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public interface MessageHandler {
+import java.io.Serializable;
+
+public interface Handler<T> {
 
     boolean canHandle(BotEvent event);
 
-    BotApiMethod<Message> handle(Message message);
+    BotApiMethod<? extends Serializable> handle(Message message);
 }

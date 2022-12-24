@@ -5,7 +5,7 @@ import by.semashko.greenjokerquestbot.exception.InvalidUrlException;
 public class UrlParser {
 
     private static final String DOMAIN_ZONE = "en.cx/";
-    private static final String PROTOCOL = "http://";
+    private static final String PROTOCOL = "https://";
     private static final String PATH = "/GameDetails.aspx?gid=";
 
     public static String getDomain(String url) {

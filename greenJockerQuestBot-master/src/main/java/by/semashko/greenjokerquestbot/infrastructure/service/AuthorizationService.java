@@ -1,4 +1,4 @@
-package by.semashko.greenjokerquestbot.service;
+package by.semashko.greenjokerquestbot.infrastructure.service;
 
 import by.semashko.greenjokerquestbot.domain.model.AuthorizationResponse;
 

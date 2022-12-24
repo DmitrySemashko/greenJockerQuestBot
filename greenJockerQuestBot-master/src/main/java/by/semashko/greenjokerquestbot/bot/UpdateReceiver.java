@@ -2,9 +2,8 @@ package by.semashko.greenjokerquestbot.bot;
 
 import by.semashko.greenjokerquestbot.bot.handler.BotEventHandler;
 import by.semashko.greenjokerquestbot.bot.handler.callbackquery.CallbackQueryHandler;
-import by.semashko.greenjokerquestbot.service.ReplyMessageService;
+import by.semashko.greenjokerquestbot.infrastructure.service.ReplyMessageService;
 import lombok.Data;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,13 +19,14 @@ import java.io.Serializable;
 @Component
 public class UpdateReceiver {
 
-    private  BotEventHandler eventHandler;
+    private BotEventHandler eventHandler;
 
-    private  BotEventUserContext eventUserContext;
+    private BotEventUserContext eventUserContext;
 
-    private  ReplyMessageService replyMessageService;
+    private ReplyMessageService replyMessageService;
 
-    private  CallbackQueryHandler callbackQueryHandler;
+    private CallbackQueryHandler callbackQueryHandler;
+
 
     @Autowired
     public UpdateReceiver(BotEventHandler eventHandler, BotEventUserContext eventUserContext, ReplyMessageService replyMessageService, CallbackQueryHandler callbackQueryHandler) {
@@ -40,19 +40,24 @@ public class UpdateReceiver {
         if (update.hasMessage() && update.getMessage().hasText()) {
             Message message = update.getMessage();
             BotEvent event = getBotCondition(message);
-            return eventHandler.handleTextMessageByEvent(message, event);
-        }else if(update.hasCallbackQuery()){
+            if (event != null) {
+                return eventHandler.handleTextMessageByEvent(message, event);
+            }else {
+                return replyMessageService.leaveChat(update.getMessage().getChatId().toString());
+            }
+        } else if (update.hasCallbackQuery()) {
             CallbackQuery callbackQuery = update.getCallbackQuery();
 
             return callbackQueryHandler.handleCallbackQuery(callbackQuery);
         }
-        return replyMessageService.getTextMessage(update.getMessage().getChatId().toString(), "ebok");
+        return replyMessageService.leaveChat(update.getMessage().getChatId().toString());
     }
 
     private BotEvent getBotCondition(Message message) {
         Long userId = message.getFrom().getId();
         String userTextMessage = message.getText();
         BotEvent botEvent;
+
 
         switch (userTextMessage) {
             case "/start":
@@ -61,8 +66,11 @@ public class UpdateReceiver {
             case "/help":
                 botEvent = BotEvent.HELP;
                 break;
-            case "Регистрация игры" :
+            case "Регистрация игры":
                 botEvent = BotEvent.SETTING;
+                break;
+            case "/start@GreenJokerEn_bot":
+                botEvent = message.getChat().isGroupChat() ? BotEvent.START_GAME_SESSION : BotEvent.MENU;
                 break;
             default:
                 botEvent = eventUserContext.getCurrentEventForUserById(userId);

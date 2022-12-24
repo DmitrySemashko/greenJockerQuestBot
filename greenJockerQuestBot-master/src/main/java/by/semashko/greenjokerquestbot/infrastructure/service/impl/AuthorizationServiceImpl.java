@@ -1,7 +1,8 @@
-package by.semashko.greenjokerquestbot.service;
+package by.semashko.greenjokerquestbot.infrastructure.service.impl;
 
 import by.semashko.greenjokerquestbot.domain.model.AuthorizationResponse;
-import by.semashko.greenjokerquestbot.rest.RestAPI;
+import by.semashko.greenjokerquestbot.infrastructure.rest.RestAPI;
+import by.semashko.greenjokerquestbot.infrastructure.service.AuthorizationService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
