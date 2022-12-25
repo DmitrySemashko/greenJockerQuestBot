@@ -52,7 +52,6 @@ public class SettingMessageHandler implements Handler<Message> {
         if (message.getText().equals("Регистрация игры")) {
             return messageService.getTextMessage(message.getChatId().toString(), "Введите ссылку на игру");
         }
-
         try {
             if (domain == null) {
                 domain = UrlParser.getDomain(message.getText());
@@ -63,13 +62,11 @@ public class SettingMessageHandler implements Handler<Message> {
             }
 
             AuthorizationResponse response = authorizationService.authorization(domain, message.getText());
-
             if (response.getError() != 0) {
                 return messageService.getTextMessage(message.getChatId().toString(), response.getMessage());
             }
 
             StateGame stateGame = checkGameState.getStateGame(domain, gameId);
-
             if (stateGame == StateGame.ACTIVE || stateGame == StateGame.GAME_NOT_START){
                 if (userService.save(telegramUserId.toString(),gameService.create(domain,Integer.toString(gameId)))){
                     return getButtonAddToChat(message.getChatId());
@@ -78,7 +75,6 @@ public class SettingMessageHandler implements Handler<Message> {
             }else {
                 return messageService.getTextMessage(message.getChatId().toString(),stateGame.getDescription());
             }
-
         } catch (InvalidUrlException | IOException e) {
             return messageService.getTextMessage(message.getChatId().toString(), e.getMessage());
         }
@@ -88,7 +84,7 @@ public class SettingMessageHandler implements Handler<Message> {
         return InlineKeyboardMarkupBuilder.create(chatId)
                 .setText("Добавить бота в чат")
                 .row()
-                .buttonWithURL("add to chat", "https://t.me/GreenJokerEn_bot?startgroup=XXXX")
+                .buttonWithURL("add to chat", "https://t.me/GreenJokerEn_bot?startgroup=1111")
                 .endRow()
                 .build();
     }

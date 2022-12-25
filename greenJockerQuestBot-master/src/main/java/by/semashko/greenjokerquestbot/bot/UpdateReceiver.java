@@ -37,18 +37,16 @@ public class UpdateReceiver {
     }
 
     public PartialBotApiMethod<? extends Serializable> handleUpdate(Update update) {
+        Message message = update.getMessage();
+        BotEvent event = getBotCondition(message);
         if (update.hasMessage() && update.getMessage().hasText()) {
-            Message message = update.getMessage();
-            BotEvent event = getBotCondition(message);
             if (event != null) {
                 return eventHandler.handleTextMessageByEvent(message, event);
             }else {
                 return replyMessageService.leaveChat(update.getMessage().getChatId().toString());
             }
-        } else if (update.hasCallbackQuery()) {
-            CallbackQuery callbackQuery = update.getCallbackQuery();
+        }else if (update.hasMyChatMember()){
 
-            return callbackQueryHandler.handleCallbackQuery(callbackQuery);
         }
         return replyMessageService.leaveChat(update.getMessage().getChatId().toString());
     }
@@ -69,7 +67,7 @@ public class UpdateReceiver {
             case "Регистрация игры":
                 botEvent = BotEvent.SETTING;
                 break;
-            case "/start@GreenJokerEn_bot":
+            case "/start@GreenJokerEn_bot 1111":
                 botEvent = message.getChat().isGroupChat() ? BotEvent.START_GAME_SESSION : BotEvent.MENU;
                 break;
             default:
