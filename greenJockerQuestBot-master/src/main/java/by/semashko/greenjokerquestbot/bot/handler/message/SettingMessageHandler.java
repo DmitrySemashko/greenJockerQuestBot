@@ -25,7 +25,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import java.io.IOException;
 
 @Slf4j
-@AllArgsConstructor(onConstructor = @__ (@Autowired))
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Getter
 @Setter
 @Component
@@ -58,7 +58,7 @@ public class SettingMessageHandler implements Handler<Message> {
                 gameId = UrlParser.getIdGame(message.getText());
                 log.info(Integer.toString(gameId));
                 log.info(domain);
-                return messageService.getTextMessage(message.getChatId().toString(), "Ввдите логин и пароль через пробел");
+                return messageService.getTextMessage(message.getChatId().toString(), "Введите логин и пароль через пробел");
             }
 
             AuthorizationResponse response = authorizationService.authorization(domain, message.getText());
@@ -67,13 +67,13 @@ public class SettingMessageHandler implements Handler<Message> {
             }
 
             StateGame stateGame = checkGameState.getStateGame(domain, gameId);
-            if (stateGame == StateGame.ACTIVE || stateGame == StateGame.GAME_NOT_START){
-                if (userService.save(telegramUserId.toString(),gameService.create(domain,Integer.toString(gameId)))){
+            if (stateGame == StateGame.ACTIVE || stateGame == StateGame.GAME_NOT_START) {
+                if (userService.save(telegramUserId.toString(), gameService.create(domain, Integer.toString(gameId)))) {
                     return getButtonAddToChat(message.getChatId());
                 }
-                return messageService.getTextMessage(message.getChatId().toString(),"Игра уже зарегистрирована");
-            }else {
-                return messageService.getTextMessage(message.getChatId().toString(),stateGame.getDescription());
+                return messageService.getTextMessage(message.getChatId().toString(), "Игра уже зарегистрирована");
+            } else {
+                return messageService.getTextMessage(message.getChatId().toString(), stateGame.getDescription());
             }
         } catch (InvalidUrlException | IOException e) {
             return messageService.getTextMessage(message.getChatId().toString(), e.getMessage());
