@@ -2,17 +2,18 @@ package by.semashko.greenjokerquestbot.bot;
 
 import by.semashko.greenjokerquestbot.bot.handler.BotEventHandler;
 import by.semashko.greenjokerquestbot.bot.handler.callbackquery.CallbackQueryHandler;
+import by.semashko.greenjokerquestbot.bot.handler.member.ChatMemberHandler;
 import by.semashko.greenjokerquestbot.infrastructure.service.ReplyMessageService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
-import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.Serializable;
+import java.util.concurrent.ExecutionException;
 
 @Slf4j
 @Data
@@ -20,33 +21,31 @@ import java.io.Serializable;
 public class UpdateReceiver {
 
     private BotEventHandler eventHandler;
-
     private BotEventUserContext eventUserContext;
-
     private ReplyMessageService replyMessageService;
-
     private CallbackQueryHandler callbackQueryHandler;
-
+    private ChatMemberHandler chatMemberHandler;
 
     @Autowired
-    public UpdateReceiver(BotEventHandler eventHandler, BotEventUserContext eventUserContext, ReplyMessageService replyMessageService, CallbackQueryHandler callbackQueryHandler) {
+    public UpdateReceiver(BotEventHandler eventHandler, BotEventUserContext eventUserContext, ReplyMessageService replyMessageService, CallbackQueryHandler callbackQueryHandler, ChatMemberHandler chatMemberHandler) {
         this.eventHandler = eventHandler;
         this.eventUserContext = eventUserContext;
         this.replyMessageService = replyMessageService;
         this.callbackQueryHandler = callbackQueryHandler;
+        this.chatMemberHandler = chatMemberHandler;
     }
 
-    public PartialBotApiMethod<? extends Serializable> handleUpdate(Update update) {
-        Message message = update.getMessage();
-        BotEvent event = getBotCondition(message);
+    public PartialBotApiMethod<? extends Serializable> handleUpdate(Update update) throws ExecutionException, InterruptedException {
         if (update.hasMessage() && update.getMessage().hasText()) {
+            Message message = update.getMessage();
+            BotEvent event = getBotCondition(message);
             if (event != null) {
                 return eventHandler.handleTextMessageByEvent(message, event);
             }else {
                 return replyMessageService.leaveChat(update.getMessage().getChatId().toString());
             }
         }else if (update.hasMyChatMember()){
-
+            return chatMemberHandler.handleChatMember(update.getMyChatMember());
         }
         return replyMessageService.leaveChat(update.getMessage().getChatId().toString());
     }
@@ -55,8 +54,6 @@ public class UpdateReceiver {
         Long userId = message.getFrom().getId();
         String userTextMessage = message.getText();
         BotEvent botEvent;
-
-
         switch (userTextMessage) {
             case "/start":
                 botEvent = BotEvent.MENU;

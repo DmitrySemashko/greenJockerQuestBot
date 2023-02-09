@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Component
 public class BotEventHandler {
@@ -20,7 +21,7 @@ public class BotEventHandler {
         this.messageService = messageService;
     }
 
-    public BotApiMethod<?> handleTextMessageByEvent(Message message, BotEvent event){
+    public BotApiMethod<?> handleTextMessageByEvent(Message message, BotEvent event) throws ExecutionException, InterruptedException {
         Handler<?> messageHandler;
         try{
             messageHandler = messageHandlers.stream()

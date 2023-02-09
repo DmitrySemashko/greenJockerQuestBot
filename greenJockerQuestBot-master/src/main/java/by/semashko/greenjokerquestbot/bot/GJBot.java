@@ -2,7 +2,7 @@ package by.semashko.greenjokerquestbot.bot;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -43,6 +43,7 @@ public class GJBot extends TelegramLongPollingBot {
         return botToken;
     }
 
+    @SneakyThrows
     @Override
     public void onUpdateReceived(Update update) {
         PartialBotApiMethod<? extends Serializable> responseToUser = updateReceiver.handleUpdate(update);
