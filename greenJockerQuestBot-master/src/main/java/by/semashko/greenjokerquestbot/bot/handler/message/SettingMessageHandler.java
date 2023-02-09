@@ -60,12 +60,10 @@ public class SettingMessageHandler implements Handler<Message> {
                 log.info(domain);
                 return messageService.getTextMessage(message.getChatId().toString(), "Введите логин и пароль через пробел");
             }
-
             AuthorizationResponse response = authorizationService.authorization(domain, message.getText());
             if (response.getError() != 0) {
                 return messageService.getTextMessage(message.getChatId().toString(), response.getMessage());
             }
-
             StateGame stateGame = checkGameState.getStateGame(domain, gameId);
             if (stateGame == StateGame.ACTIVE || stateGame == StateGame.GAME_NOT_START) {
                 if (userService.save(telegramUserId.toString(), gameService.create(domain, Integer.toString(gameId)))) {

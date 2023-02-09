@@ -16,8 +16,8 @@ public class GameScheduler {
 
     private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
-    public Future<GameEngineModel> getResult(WatchEngine engine){
-        return executorService.schedule(engine,2, TimeUnit.SECONDS);
+    public Future<GameEngineModel> getResult(WatchEngine engine) {
+        return executorService.schedule(engine, 2, TimeUnit.SECONDS);
     }
 
 }

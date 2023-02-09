@@ -49,11 +49,9 @@ public class GameSessionMessageHandler implements Handler<Message> {
             Future<GameEngineModel> future = scheduler.getResult(watchEngine);
             GameEngineModel model = future.get();
             log.info(model.getGameTitle());
+            return messageService.getTextMessage(telegramId.toString(),"Слежение за игрой включено");
         }
         return null;
     }
 
-    private boolean isGameExist(Long telegramID){
-        return userService.getByChatId(telegramID.toString()) != null;
-    }
 }

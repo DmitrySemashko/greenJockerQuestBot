@@ -24,7 +24,7 @@ public class BotJoinChatMemberHandler implements ChatMemberHandler {
         String memberId= member.getFrom().getId().toString();
         String userTelegramId = userService.getByChatId(memberId).getTelegramId();
         if (memberId.equals(userTelegramId)) {
-            return messageService.getTextMessage(memberId,"Игра успешно зарегистрирована");
+            return messageService.getTextMessage(member.getChat().getId().toString(),"Всем привет, а вот и я");
         }
         return messageService.leaveChat(member.getChat().getId().toString());
     }
