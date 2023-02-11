@@ -1,5 +1,6 @@
 package by.semashko.greenjokerquestbot.infrastructure.service;
 
+import by.semashko.greenjokerquestbot.domain.enums.StateGame;
 import by.semashko.greenjokerquestbot.domain.model.GameEngineModel;
 import by.semashko.greenjokerquestbot.domain.persistence.entity.Game;
 import by.semashko.greenjokerquestbot.infrastructure.rest.RestAPI;
@@ -7,29 +8,36 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.util.concurrent.Callable;
 
 @Service
 @Data
 @Getter
 @Setter
+@Slf4j
+@AllArgsConstructor(onConstructor = @__ (@Autowired))
+public class WatchEngine implements Runnable {
 
-public class WatchEngine implements Callable<GameEngineModel> {
-    @Autowired
     private final RestAPI api;
-    @Autowired
     private UserService service;
-
-    private Long telegramChatId;
-
+    private GameEngineModelService gameEngineModelService;
+    private static Long telegramChatId;
 
     @Override
-    public GameEngineModel call() throws IOException {
+    @SneakyThrows
+    public void run() {
         Game game = service.getByChatId(telegramChatId.toString()).getGame();
-        return api.checkStateGame(game.getDomain(),Integer.parseInt(game.getGameId()));
+        StateGame stateGame = gameEngineModelService.getStateGame(game.getDomain(),game.getId());
+        gameEngineModelService.setStateGames(stateGame.getNumberError());
+        GameEngineModel model = gameEngineModelService.requestGetModel(game.getDomain(),game.getId());
+        gameEngineModelService.setModel(model);
+        System.out.println(model.getEvent());
+    }
+
+    public void setTelegramChatId(Long telegramId) {
+        telegramChatId = telegramId;
     }
 }

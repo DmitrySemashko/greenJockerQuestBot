@@ -15,15 +15,13 @@ import java.util.Map;
 public class RestAPI {
 
     public AuthorizationResponse authorize(String url, Map<String,String> loginAndPassword) throws IOException {
-
         ApiEngineInterface apiEngineInterface = RestClient.getApiEngine(url);
         Call<AuthorizationResponse> responseCall = apiEngineInterface.authorization(loginAndPassword);
         Response<AuthorizationResponse> response = responseCall.execute();
         return response.body();
     }
 
-    public GameEngineModel checkStateGame(String url, int gameId) throws IOException {
-
+    public GameEngineModel getModel(String url, int gameId) throws IOException {
         ApiEngineInterface apiEngineInterface = RestClient.getApiEngine(url);
         Call<GameEngineModel> gameEngineModelCall = apiEngineInterface.getStateGame(gameId);
         Response<GameEngineModel> response = gameEngineModelCall.execute();

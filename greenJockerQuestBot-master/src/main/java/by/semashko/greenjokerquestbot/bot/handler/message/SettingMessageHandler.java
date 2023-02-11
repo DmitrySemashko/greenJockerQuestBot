@@ -7,7 +7,7 @@ import by.semashko.greenjokerquestbot.domain.enums.StateGame;
 import by.semashko.greenjokerquestbot.domain.model.AuthorizationResponse;
 import by.semashko.greenjokerquestbot.exception.InvalidUrlException;
 import by.semashko.greenjokerquestbot.infrastructure.service.AuthorizationService;
-import by.semashko.greenjokerquestbot.infrastructure.service.CheckGameState;
+import by.semashko.greenjokerquestbot.infrastructure.service.GameEngineModelService;
 import by.semashko.greenjokerquestbot.infrastructure.service.ReplyMessageService;
 import by.semashko.greenjokerquestbot.infrastructure.service.UserService;
 import by.semashko.greenjokerquestbot.infrastructure.service.impl.GameServiceImpl;
@@ -33,7 +33,7 @@ public class SettingMessageHandler implements Handler<Message> {
 
     private ReplyMessageService messageService;
     private AuthorizationService authorizationService;
-    private CheckGameState checkGameState;
+    private GameEngineModelService gameEngineModelService;
     private UserService userService;
     private GameServiceImpl gameService;
 
@@ -64,7 +64,7 @@ public class SettingMessageHandler implements Handler<Message> {
             if (response.getError() != 0) {
                 return messageService.getTextMessage(message.getChatId().toString(), response.getMessage());
             }
-            StateGame stateGame = checkGameState.getStateGame(domain, gameId);
+            StateGame stateGame = gameEngineModelService.getStateGame(domain, gameId);
             if (stateGame == StateGame.ACTIVE || stateGame == StateGame.GAME_NOT_START) {
                 if (userService.save(telegramUserId.toString(), gameService.create(domain, Integer.toString(gameId)))) {
                     return getButtonAddToChat(message.getChatId());

@@ -67,7 +67,7 @@ public class UpdateReceiver {
             case "Регистрация игры":
                 botEvent = BotEvent.SETTING;
                 break;
-            case "/start@GreenJokerEn_bot 1111":
+            case "/start@GreenJokerEn_bot":
                 botEvent = isGroupChat ? BotEvent.START_GAME_SESSION : BotEvent.MENU;
                 break;
             default:

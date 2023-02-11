@@ -10,7 +10,7 @@ public class PenaltyHelp {
     @SerializedName("Number")
     private int number;
     @SerializedName("HelpText")
-    private String helpTex;
+    private String helpText;
     @SerializedName("IsPenalty")
     private boolean isPenalty;
     @SerializedName("Penalty")

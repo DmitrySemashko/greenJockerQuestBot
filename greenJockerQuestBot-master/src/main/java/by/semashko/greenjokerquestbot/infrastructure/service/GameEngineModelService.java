@@ -5,6 +5,7 @@ import by.semashko.greenjokerquestbot.domain.model.GameEngineModel;
 import by.semashko.greenjokerquestbot.infrastructure.rest.RestAPI;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +14,20 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 @Service
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Getter
-public class CheckGameState {
+@Setter
+public class GameEngineModelService {
 
     private final RestAPI api;
 
-    public StateGame getStateGame(String url, int id) throws IOException {
-        GameEngineModel model = api.checkStateGame(url, id);
-        return setStateGames(model.getEvent());
+    private GameEngineModel model;
 
+    public GameEngineModelService(RestAPI api) {
+        this.api = api;
+    }
+
+    public StateGame getStateGame(String url, int id) throws IOException {
+        return setStateGames(requestGetModel(url, id).getEvent());
     }
 
     public StateGame setStateGames(int event) {
@@ -31,4 +36,9 @@ public class CheckGameState {
                 .findAny()
                 .orElseThrow(NoSuchElementException::new);
     }
+
+    public GameEngineModel requestGetModel(String url,int id) throws IOException {
+        return model = api.getModel(url, id);
+    }
+
 }

@@ -43,8 +43,8 @@ public class Level {
     private List<MixedActions> mixedActions;
     @SerializedName("Messages")
     private List<Message> messages;
-    @SerializedName("Task")
-    private Task task;
+    @SerializedName("Tasks")
+    private List<Task> task;
     @SerializedName("Helps")
     private List<Help> helps;
     @SerializedName("PenaltyHelps")
