@@ -1,5 +1,7 @@
 package by.semashko.greenjokerquestbot.infrastructure.rest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -22,9 +24,12 @@ public class RestClient {
 
     private static Retrofit getRetrofit(String url) {
         if (retrofit == null){
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
             return retrofit = new Retrofit.Builder()
                     .baseUrl(url)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(getClient())
                     .build();
         }

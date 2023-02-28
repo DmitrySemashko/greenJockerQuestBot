@@ -29,12 +29,16 @@ public class WatchEngine implements Runnable {
     @Override
     @SneakyThrows
     public void run() {
-        Game game = service.getByChatId(telegramChatId.toString()).getGame();
-        StateGame stateGame = gameEngineModelService.getStateGame(game.getDomain(),game.getId());
-        gameEngineModelService.setStateGames(stateGame.getNumberError());
-        GameEngineModel model = gameEngineModelService.requestGetModel(game.getDomain(),game.getId());
-        gameEngineModelService.setModel(model);
-        System.out.println(model.getEvent());
+        if(telegramChatId != null) {
+            String chatId = telegramChatId.toString();
+            Game game = service.getByChatId(chatId).getGame();
+            StateGame stateGame = gameEngineModelService.getStateGame(game.getDomain(), game.getId());
+            gameEngineModelService.setStateGames(stateGame.getNumberError());
+            GameEngineModel model = gameEngineModelService.requestGetModel(game.getDomain(), game.getId());
+            gameEngineModelService.setModel(model);
+            log.info(gameEngineModelService.getModel().getGameTitle());
+        }
+        log.info("Game not found");
     }
 
     public void setTelegramChatId(Long telegramId) {

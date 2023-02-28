@@ -31,8 +31,6 @@ public class GameSessionMessageHandler implements Handler<Message> {
     private GameService gameService;
     private ReplyMessageService messageService;
     private WatchEngine watchEngine;
-    private GameScheduler scheduler;
-
 
     @Override
     public boolean canHandle(BotEvent event) {
@@ -44,7 +42,6 @@ public class GameSessionMessageHandler implements Handler<Message> {
         if (message.getText().equals("/start@GreenJokerEn_bot") || message.getText().equals("/start@GreenJokerEn_bot 1111")){
             Long telegramId = message.getFrom().getId();
             watchEngine.setTelegramChatId(telegramId);
-            scheduler.getExecutorService().scheduleAtFixedRate(watchEngine,1,2, TimeUnit.SECONDS);
             return messageService.getTextMessage(telegramId.toString(),"Слежение за игрой включено");
         }
         return null;

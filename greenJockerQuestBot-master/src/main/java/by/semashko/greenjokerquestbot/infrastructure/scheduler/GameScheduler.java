@@ -1,15 +1,27 @@
 package by.semashko.greenjokerquestbot.infrastructure.scheduler;
 
-import lombok.Getter;
+import by.semashko.greenjokerquestbot.infrastructure.service.WatchEngine;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import javax.annotation.PostConstruct;
 
 @Service
-@Getter
+@Data
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class GameScheduler {
 
-    private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+    private ThreadPoolTaskScheduler threadPoolTaskScheduler;
+    private PeriodicTrigger trigger;
+    private WatchEngine watchEngine;
 
+    @PostConstruct
+    public void scheduleRequestServer(){
+        threadPoolTaskScheduler.schedule(watchEngine,trigger);
+
+    }
 }
