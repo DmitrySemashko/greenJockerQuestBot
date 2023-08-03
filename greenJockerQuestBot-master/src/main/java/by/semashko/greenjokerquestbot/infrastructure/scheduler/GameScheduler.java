@@ -22,6 +22,5 @@ public class GameScheduler {
     @PostConstruct
     public void scheduleRequestServer(){
         threadPoolTaskScheduler.schedule(watchEngine,trigger);
-
     }
 }
