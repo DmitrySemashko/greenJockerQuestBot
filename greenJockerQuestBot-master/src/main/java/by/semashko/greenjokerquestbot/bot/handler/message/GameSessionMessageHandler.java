@@ -5,7 +5,7 @@ import by.semashko.greenjokerquestbot.bot.handler.Handler;
 import by.semashko.greenjokerquestbot.infrastructure.service.GameService;
 import by.semashko.greenjokerquestbot.infrastructure.service.ReplyMessageService;
 import by.semashko.greenjokerquestbot.infrastructure.service.UserService;
-import by.semashko.greenjokerquestbot.infrastructure.service.WatchEngine;
+import by.semashko.greenjokerquestbot.infrastructure.service.impl.GameSessionService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,7 +27,9 @@ public class GameSessionMessageHandler implements Handler<Message> {
     private UserService userService;
     private GameService gameService;
     private ReplyMessageService messageService;
-    private WatchEngine watchEngine;
+    private GameSessionService gameSessionService;
+
+    private static Long telegramId;
 
     @Override
     public boolean canHandle(BotEvent event) {
@@ -36,12 +38,12 @@ public class GameSessionMessageHandler implements Handler<Message> {
 
     @Override
     public BotApiMethod<Message> handle(Message message) {
-        Long telegramId = message.getFrom().getId();
+        telegramId = message.getChatId();
         if (message.getText().equals("/start@GreenJokerEn_bot") || message.getText().equals("/start@GreenJokerEn_bot 1111")){
-            if (watchEngine.getGameEngineModelService().getModel().getEvent() == 0){
-                return messageService.getTextMessage(telegramId.toString(),watchEngine.getGameEngineModelService().getModel().getLevel().getTask().get(0).getText());
+            if (gameSessionService.isGameActive()){
+                return messageService.getTextMessage(telegramId.toString(),gameSessionService.getTask().getText());
             }
-            watchEngine.setTelegramChatId(telegramId);
+            gameSessionService.setTelegramChatId(telegramId);
             return messageService.getTextMessage(telegramId.toString(),"Слежение за игрой включено");
         }
         return null;

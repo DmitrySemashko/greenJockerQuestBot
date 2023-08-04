@@ -2,6 +2,7 @@ package by.semashko.greenjokerquestbot.infrastructure.rest;
 
 import by.semashko.greenjokerquestbot.domain.model.AuthorizationResponse;
 import by.semashko.greenjokerquestbot.domain.model.GameEngineModel;
+import by.semashko.greenjokerquestbot.domain.model.LevelAction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import retrofit2.Call;
@@ -27,4 +28,5 @@ public class RestAPI {
         Response<GameEngineModel> response = gameEngineModelCall.execute();
         return response.body();
     }
+
 }

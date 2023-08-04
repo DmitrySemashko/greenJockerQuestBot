@@ -7,7 +7,7 @@ import by.semashko.greenjokerquestbot.domain.enums.StateGame;
 import by.semashko.greenjokerquestbot.domain.model.AuthorizationResponse;
 import by.semashko.greenjokerquestbot.exception.InvalidUrlException;
 import by.semashko.greenjokerquestbot.infrastructure.service.AuthorizationService;
-import by.semashko.greenjokerquestbot.infrastructure.service.GameEngineModelService;
+import by.semashko.greenjokerquestbot.infrastructure.service.impl.GameEngineModelService;
 import by.semashko.greenjokerquestbot.infrastructure.service.ReplyMessageService;
 import by.semashko.greenjokerquestbot.infrastructure.service.UserService;
 import by.semashko.greenjokerquestbot.infrastructure.service.impl.GameServiceImpl;

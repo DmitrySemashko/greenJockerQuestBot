@@ -4,6 +4,7 @@ import by.semashko.greenjokerquestbot.domain.enums.StateGame;
 import by.semashko.greenjokerquestbot.domain.model.GameEngineModel;
 import by.semashko.greenjokerquestbot.domain.persistence.entity.Game;
 import by.semashko.greenjokerquestbot.infrastructure.rest.RestAPI;
+import by.semashko.greenjokerquestbot.infrastructure.service.impl.GameEngineModelService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;

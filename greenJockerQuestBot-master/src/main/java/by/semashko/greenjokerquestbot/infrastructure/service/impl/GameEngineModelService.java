@@ -1,4 +1,4 @@
-package by.semashko.greenjokerquestbot.infrastructure.service;
+package by.semashko.greenjokerquestbot.infrastructure.service.impl;
 
 import by.semashko.greenjokerquestbot.domain.enums.StateGame;
 import by.semashko.greenjokerquestbot.domain.model.GameEngineModel;

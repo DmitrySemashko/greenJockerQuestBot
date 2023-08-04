@@ -13,6 +13,8 @@ public class Level {
     private int levelId;
     @SerializedName("Name")
     private String name;
+    @SerializedName("Number")
+    private String number;
     @SerializedName("Timeout")
     private int timeout;
     @SerializedName("TimeoutAward")
