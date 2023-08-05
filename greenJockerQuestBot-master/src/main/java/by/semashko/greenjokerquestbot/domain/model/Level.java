@@ -3,6 +3,7 @@ package by.semashko.greenjokerquestbot.domain.model;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -25,8 +26,6 @@ public class Level {
     private boolean isPassed;
     @SerializedName("Dismissed")
     private boolean dismissed;
-    @SerializedName("StartTime ")
-    private LocalTime startTime;
     @SerializedName("HasAnswerBlockRule")
     private boolean hasAnswerBlockRule;
     @SerializedName("BlockDuration ")

@@ -25,7 +25,6 @@ public class RestClient {
     private static Retrofit getRetrofit(String url) {
         if (retrofit == null){
             Gson gson = new GsonBuilder()
-                    .setLenient()
                     .create();
             return retrofit = new Retrofit.Builder()
                     .baseUrl(url)

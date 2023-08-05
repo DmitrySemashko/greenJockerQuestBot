@@ -16,6 +16,6 @@ public interface ApiEngineInterface {
     @FormUrlEncoded
     @POST("login/signin?json=1")
     Call<AuthorizationResponse> authorization(@FieldMap(encoded = true) Map<String,String> fields);
-    @POST("GameEngines/Encounter/Play/{LevelId}&{LevelNumber}&{LevelAction.Answer}?json=1")
-    Call<LevelAction> sendAnswer(@Path("LevelId") int levelId,@Path("LevelNumber")String levelNumber,@Path("LevelAction.Answer") String answer);
+    @POST("GameEngines/Encounter/Play/{GameId}?json=1")
+    Call<LevelAction> sendAnswer(@Path("GameId") int id, @FieldMap Map<String,String> fields);
 }

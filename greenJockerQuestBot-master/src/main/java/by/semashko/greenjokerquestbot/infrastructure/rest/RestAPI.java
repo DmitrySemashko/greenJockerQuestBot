@@ -29,4 +29,11 @@ public class RestAPI {
         return response.body();
     }
 
+    public LevelAction sendCode(String url, int gameId, Map<String, String> params) throws IOException {
+        ApiEngineInterface apiEngineInterface = RestClient.getApiEngine(url);
+        Call<LevelAction > levelActionCall = apiEngineInterface.sendAnswer(gameId,params);
+        Response<LevelAction> response = levelActionCall.execute();
+        return response.body();
+    }
+
 }

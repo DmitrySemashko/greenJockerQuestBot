@@ -14,7 +14,8 @@ public enum StateGame {
     GAME_NOT_FOUND(3,"Запрошенная игра не соответствует запрошенному Engine"),
     NOT_SUBMIT_APP(7, "Не подана заявка (игроком)"),
     NOT_SUBMIT_APP_TEAM(8,"Не подана заявка (командой)"),
-    LEVEL_REMOVED(16,"Уровень снят");
+    LEVEL_REMOVED(16,"Уровень снят"),
+    ALL_SECTORS_GUESSES(20,"Все сектора отгаданы");
 
     @Setter
     @Getter
