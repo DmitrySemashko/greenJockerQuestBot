@@ -5,32 +5,30 @@ import by.semashko.greenjokerquestbot.domain.model.GameEngineModel;
 import by.semashko.greenjokerquestbot.domain.persistence.entity.Game;
 import by.semashko.greenjokerquestbot.infrastructure.rest.RestAPI;
 import by.semashko.greenjokerquestbot.infrastructure.service.impl.GameEngineModelService;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@Data
 @Getter
 @Setter
 @Slf4j
-@AllArgsConstructor(onConstructor = @__ (@Autowired))
 public class WatchEngine implements Runnable {
 
-    private final RestAPI api;
+    private RestAPI api;
     private UserService service;
     private GameEngineModelService gameEngineModelService;
     private static Long telegramChatId;
 
+
     @Override
     @SneakyThrows
     public void run() {
-        if(telegramChatId != null) {
+        if (telegramChatId != null) {
             String chatId = telegramChatId.toString();
             Game game = service.getByChatId(chatId).getGame();
             StateGame stateGame = gameEngineModelService.getStateGame(game.getDomain(), Integer.parseInt(game.getGameId()));
@@ -43,5 +41,32 @@ public class WatchEngine implements Runnable {
 
     public void setTelegramChatId(Long telegramId) {
         telegramChatId = telegramId;
+    }
+
+    public void setApi(RestAPI api) {
+        this.api = api;
+    }
+
+    public UserService getService() {
+        return service;
+    }
+
+    @Autowired
+    public void setService(UserService service) {
+        this.service = service;
+    }
+
+    public GameEngineModelService getGameEngineModelService() {
+        return gameEngineModelService;
+    }
+
+    @Autowired
+    public void setGameEngineModelService(GameEngineModelService gameEngineModelService) {
+        this.gameEngineModelService = gameEngineModelService;
+    }
+
+
+    public static Logger getLog() {
+        return log;
     }
 }

@@ -7,7 +7,6 @@ import by.semashko.greenjokerquestbot.infrastructure.service.GameService;
 import by.semashko.greenjokerquestbot.infrastructure.service.ReplyMessageService;
 import by.semashko.greenjokerquestbot.infrastructure.service.UserService;
 import by.semashko.greenjokerquestbot.infrastructure.service.impl.GameSessionService;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,8 +16,9 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
+import static by.semashko.greenjokerquestbot.util.StringConstants.GAME_TRACKING_ENABLED;
+
 @Component
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 @NoArgsConstructor
 @Getter
 @Setter
@@ -43,17 +43,39 @@ public class GameSessionMessageHandler implements Handler<Message> {
         telegramId = message.getChatId();
         telegramUserId = message.getFrom().getId();
         if (message.getText().equals("/start@GreenJokerEn_bot") || message.getText().equals("/start@GreenJokerEn_bot 1111")) {
+            gameSessionService.setTelegramChatId(telegramUserId);
             if (gameSessionService.isGameActive()) {
+                if (gameSessionService.getModel().getEngineAction().getLevelAction().isCorrect()) {
+                    return messageService.getTextMessage(telegramId.toString(), gameSessionService.getTask().getText());
+                }
                 return messageService.getTextMessage(telegramId.toString(), gameSessionService.getTask().getText());
             }
-            if (!gameSessionService.getLevel().isPassed()){
-                Game game = userService.getByChatId(telegramUserId.toString()).getGame();
-                return messageService.getTextMessage(telegramId.toString(),gameSessionService.sendCode(Integer.parseInt(game.getGameId()), game.getDomain(),String.valueOf(gameSessionService.getLevel().getLevelId()),gameSessionService.getLevel().getNumber(),message.getText()));
-            }
-                gameSessionService.setTelegramChatId(telegramId);
-            return messageService.getTextMessage(telegramId.toString(), "Слежение за игрой включено");
+            return messageService.getTextMessage(telegramId.toString(), GAME_TRACKING_ENABLED);
         }
-        return null;
+        if (!gameSessionService.getLevel().isPassed()) {
+            Game game = userService.getByChatId(telegramUserId.toString()).getGame();
+            return messageService.getTextMessage(telegramId.toString(), gameSessionService.sendCode(Integer.parseInt(game.getGameId()), game.getDomain(), String.valueOf(gameSessionService.getLevel().getLevelId()), gameSessionService.getLevel().getNumber(), message.getText()));
+        }
+        return messageService.getTextMessage(telegramId.toString(), GAME_TRACKING_ENABLED);
     }
 
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public void setGameService(GameService gameService) {
+        this.gameService = gameService;
+    }
+
+    @Autowired
+    public void setMessageService(ReplyMessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    @Autowired
+    public void setGameSessionService(GameSessionService gameSessionService) {
+        this.gameSessionService = gameSessionService;
+    }
 }

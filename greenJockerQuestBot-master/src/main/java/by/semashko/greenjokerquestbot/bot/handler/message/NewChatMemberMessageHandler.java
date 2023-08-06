@@ -14,6 +14,8 @@ import org.telegram.telegrambots.meta.api.objects.User;
 import java.io.Serializable;
 import java.util.List;
 
+import static by.semashko.greenjokerquestbot.util.StringConstants.REGISTRATION_SUCCES;
+
 @Component
 @Data
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -31,7 +33,7 @@ public class NewChatMemberMessageHandler implements Handler<Message> {
         List<User> users = message.getNewChatMembers();
         User user = users.get(0);
         if (user.getUserName().equals("GreenJokerEn_bot")) {
-            return replyMessageService.getTextMessage(message.getChatId().toString(),"Игра успешно зарегистрирована");
+            return replyMessageService.getTextMessage(message.getChatId().toString(),REGISTRATION_SUCCES);
         }
         return null;
     }

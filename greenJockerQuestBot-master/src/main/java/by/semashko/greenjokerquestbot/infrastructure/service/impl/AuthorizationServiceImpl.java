@@ -13,12 +13,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static by.semashko.greenjokerquestbot.util.StringConstants.LOGIN;
+import static by.semashko.greenjokerquestbot.util.StringConstants.PASSWORD;
+
 @Service
 @AllArgsConstructor(onConstructor = @__ (@Autowired))
 public class AuthorizationServiceImpl implements AuthorizationService {
-
-    private static final String LOGIN = "Login";
-    private static final String PASSWORD = "Password";
 
     @Getter
     @Setter

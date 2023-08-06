@@ -26,7 +26,7 @@ public class UpdateReceiver {
     private ReplyMessageService replyMessageService;
     private ChatMemberHandler chatMemberHandler;
 
-    @Autowired
+
     public UpdateReceiver(BotEventHandler eventHandler, BotEventUserContext eventUserContext, ReplyMessageService replyMessageService, ChatMemberHandler chatMemberHandler) {
         this.eventHandler = eventHandler;
         this.eventUserContext = eventUserContext;
@@ -67,7 +67,7 @@ public class UpdateReceiver {
             case "Регистрация игры":
                 botEvent = BotEvent.SETTING;
                 break;
-            case "/start@GreenJokerEn_bot 1111":
+            case "/start@GreenJokerEn_bot":
                 botEvent = isGroupChat ? BotEvent.START_GAME_SESSION : BotEvent.MENU;
                 break;
             default:
@@ -80,5 +80,20 @@ public class UpdateReceiver {
     private BotEvent getBotNewChatMemberCondition(Long id, List<User> newChatMembers) {
         return newChatMembers.isEmpty() ? null : BotEvent.NEW_CHAT_MEMBER;
     }
-
+   @Autowired
+    public void setEventHandler(BotEventHandler eventHandler) {
+        this.eventHandler = eventHandler;
+    }
+    @Autowired
+    public void setEventUserContext(BotEventUserContext eventUserContext) {
+        this.eventUserContext = eventUserContext;
+    }
+    @Autowired
+    public void setReplyMessageService(ReplyMessageService replyMessageService) {
+        this.replyMessageService = replyMessageService;
+    }
+    @Autowired
+    public void setChatMemberHandler(ChatMemberHandler chatMemberHandler) {
+        this.chatMemberHandler = chatMemberHandler;
+    }
 }

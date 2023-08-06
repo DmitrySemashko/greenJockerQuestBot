@@ -13,5 +13,7 @@ public final class StringConstants {
     public static final String LEVEL_ID = "LevelId";
     public static final String LEVEL_NUMBER = "LevelNumber";
     public static final String LEVEL_ACTION_ANSWER = "LevelAction.Answer";
+    public static final String CORRECT = "Ответ верен";
+    public static final String INCORRECT = "Ответ не верен";
 
 }

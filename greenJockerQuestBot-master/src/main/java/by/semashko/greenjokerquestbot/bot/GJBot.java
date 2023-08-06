@@ -1,9 +1,10 @@
 package by.semashko.greenjokerquestbot.bot;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -17,7 +18,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @Slf4j
 @Component
-@Data
+@Setter
 public class GJBot extends TelegramLongPollingBot {
 
 
@@ -27,11 +28,9 @@ public class GJBot extends TelegramLongPollingBot {
     @Value("${bot.token}")
     private String botToken;
 
-    private final UpdateReceiver updateReceiver;
+    private  UpdateReceiver updateReceiver;
 
-    public GJBot(UpdateReceiver updateReceiver) {
-        this.updateReceiver = updateReceiver;
-    }
+
 
     @Override
     public String getBotUsername() {
@@ -55,5 +54,8 @@ public class GJBot extends TelegramLongPollingBot {
                 e.printStackTrace();
             }
         }
+    }
+    public void setUpdateReceiver(UpdateReceiver updateReceiver){
+        this.updateReceiver = updateReceiver;
     }
 }
