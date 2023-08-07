@@ -7,6 +7,7 @@ import by.semashko.greenjokerquestbot.infrastructure.service.GameService;
 import by.semashko.greenjokerquestbot.infrastructure.service.ReplyMessageService;
 import by.semashko.greenjokerquestbot.infrastructure.service.UserService;
 import by.semashko.greenjokerquestbot.infrastructure.service.impl.GameSessionService;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +24,7 @@ import static by.semashko.greenjokerquestbot.util.StringConstants.GAME_TRACKING_
 @Getter
 @Setter
 @Slf4j
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class GameSessionMessageHandler implements Handler<Message> {
 
     private UserService userService;
@@ -59,23 +61,4 @@ public class GameSessionMessageHandler implements Handler<Message> {
         return messageService.getTextMessage(telegramId.toString(), GAME_TRACKING_ENABLED);
     }
 
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
-    public void setGameService(GameService gameService) {
-        this.gameService = gameService;
-    }
-
-    @Autowired
-    public void setMessageService(ReplyMessageService messageService) {
-        this.messageService = messageService;
-    }
-
-    @Autowired
-    public void setGameSessionService(GameSessionService gameSessionService) {
-        this.gameSessionService = gameSessionService;
-    }
 }

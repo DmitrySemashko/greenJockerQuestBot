@@ -5,7 +5,9 @@ import by.semashko.greenjokerquestbot.domain.model.Level;
 import by.semashko.greenjokerquestbot.domain.model.Task;
 import by.semashko.greenjokerquestbot.infrastructure.rest.RestAPI;
 import by.semashko.greenjokerquestbot.infrastructure.service.WatchEngine;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,8 @@ import static by.semashko.greenjokerquestbot.util.StringConstants.LEVEL_NUMBER;
 
 @Service
 @Getter
+@Setter
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class GameSessionService {
 
     private WatchEngine engine;
@@ -77,12 +81,5 @@ public class GameSessionService {
     private boolean isCode(String code) {
         return code.startsWith("/");
     }
-    @Autowired
-    public void setEngine(WatchEngine engine) {
-        this.engine = engine;
-    }
-    @Autowired
-    public void setApi(RestAPI api) {
-        this.api = api;
-    }
+
 }
