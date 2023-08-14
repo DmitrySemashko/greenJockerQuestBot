@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public enum StateGame {
+
     ACTIVE(0,""),
     NO_USER(4,"Игрок не залогинен на сайте"),
     GAME_ID_NOT_FOUND(2,"Игра с указанным ID не существует"),
@@ -28,6 +29,5 @@ public enum StateGame {
         this.numberError = numberError;
         this.description = description;
     }
-
 
 }

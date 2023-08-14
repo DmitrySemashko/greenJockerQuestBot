@@ -3,9 +3,9 @@ package by.semashko.greenjokerquestbot.bot;
 import by.semashko.greenjokerquestbot.bot.handler.BotEventHandler;
 import by.semashko.greenjokerquestbot.bot.handler.member.ChatMemberHandler;
 import by.semashko.greenjokerquestbot.infrastructure.service.ReplyMessageService;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -19,20 +19,13 @@ import java.util.concurrent.ExecutionException;
 @Slf4j
 @Data
 @Component
+@AllArgsConstructor
 public class UpdateReceiver {
 
-    private BotEventHandler eventHandler;
-    private BotEventUserContext eventUserContext;
-    private ReplyMessageService replyMessageService;
-    private ChatMemberHandler chatMemberHandler;
-
-
-    public UpdateReceiver(BotEventHandler eventHandler, BotEventUserContext eventUserContext, ReplyMessageService replyMessageService, ChatMemberHandler chatMemberHandler) {
-        this.eventHandler = eventHandler;
-        this.eventUserContext = eventUserContext;
-        this.replyMessageService = replyMessageService;
-        this.chatMemberHandler = chatMemberHandler;
-    }
+    private final BotEventHandler eventHandler;
+    private final BotEventUserContext eventUserContext;
+    private final ReplyMessageService replyMessageService;
+    private final ChatMemberHandler chatMemberHandler;
 
     public PartialBotApiMethod<? extends Serializable> handleUpdate(Update update) throws InterruptedException, ExecutionException {
         if (update.hasMessage()) {
@@ -70,6 +63,9 @@ public class UpdateReceiver {
             case "/start@GreenJokerEn_bot 1111":
                 botEvent = isGroupChat ? BotEvent.START_GAME_SESSION : BotEvent.MENU;
                 break;
+            case "next level":
+                botEvent = BotEvent.START_GAME_SESSION;
+                break;
             default:
                 botEvent = eventUserContext.getCurrentEventForUserById(userId);
         }
@@ -79,21 +75,5 @@ public class UpdateReceiver {
 
     private BotEvent getBotNewChatMemberCondition(Long id, List<User> newChatMembers) {
         return newChatMembers.isEmpty() ? null : BotEvent.NEW_CHAT_MEMBER;
-    }
-   @Autowired
-    public void setEventHandler(BotEventHandler eventHandler) {
-        this.eventHandler = eventHandler;
-    }
-    @Autowired
-    public void setEventUserContext(BotEventUserContext eventUserContext) {
-        this.eventUserContext = eventUserContext;
-    }
-    @Autowired
-    public void setReplyMessageService(ReplyMessageService replyMessageService) {
-        this.replyMessageService = replyMessageService;
-    }
-    @Autowired
-    public void setChatMemberHandler(ChatMemberHandler chatMemberHandler) {
-        this.chatMemberHandler = chatMemberHandler;
     }
 }

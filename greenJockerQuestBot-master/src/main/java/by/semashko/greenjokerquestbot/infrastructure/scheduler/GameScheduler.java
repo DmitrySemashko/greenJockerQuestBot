@@ -8,19 +8,15 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-
 @Service
 @Data
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class GameScheduler {
 
     private ThreadPoolTaskScheduler threadPoolTaskScheduler;
-    private PeriodicTrigger trigger;
-    private WatchEngine watchEngine;
 
-    @PostConstruct
-    public void scheduleRequestServer(){
-        threadPoolTaskScheduler.schedule(watchEngine,trigger);
+    public void scheduleRequestServer(WatchEngine engine, PeriodicTrigger trigger){
+        threadPoolTaskScheduler.schedule(engine,trigger);
     }
+
 }
