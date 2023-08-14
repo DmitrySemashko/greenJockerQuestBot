@@ -1,10 +1,10 @@
 package by.semashko.greenjokerquestbot.bot;
 
 import by.semashko.greenjokerquestbot.domain.enums.StateGame;
-import by.semashko.greenjokerquestbot.domain.persistence.entity.Game;
 import by.semashko.greenjokerquestbot.infrastructure.scheduler.GameScheduler;
 import by.semashko.greenjokerquestbot.infrastructure.service.UserService;
 import by.semashko.greenjokerquestbot.infrastructure.service.WatchEngine;
+import by.semashko.greenjokerquestbot.infrastructure.service.impl.GameEngineModelService;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +12,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -88,10 +89,32 @@ public class GJBot extends TelegramLongPollingBot {
         scheduler.scheduleRequestServer(engine, trigger);
     }
 
-    private void onUpdateReceivedEngine() throws ExecutionException, InterruptedException {
-       if (service.getByChatId(String.valueOf(chatId)).getGame() != null){
-           startWatchEngine();
-       }
+
+    private synchronized void onUpdateReceivedEngine() throws ExecutionException, InterruptedException {
+        startWatchEngine();
+        GameEngineModelService service = engine.getGameEngineModelService();
+        if (service.getModel() != null) {
+            int event = service.getModel().getEvent();
+            StateGame stateGame = service.setStateGames(event);
+            if (stateGame == StateGame.ACTIVE) {
+                if (service.getModel().getLevel().isPassed()){
+                    Update update = new Update();
+                    update.setMessage(new Message());
+                    update.getMessage().setText("next level");
+                    PartialBotApiMethod<? extends Serializable> responseToUser = updateReceiver.handleUpdate(update);
+                    if (responseToUser instanceof BotApiMethod) {
+                        try {
+                            execute((BotApiMethod<? extends Serializable>) responseToUser);
+                        } catch (TelegramApiException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }
+            }
+        }else {
+            wait(35);
+        }
     }
 
 }
