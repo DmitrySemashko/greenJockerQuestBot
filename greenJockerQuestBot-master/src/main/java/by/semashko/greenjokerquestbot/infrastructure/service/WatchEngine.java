@@ -4,8 +4,8 @@ import by.semashko.greenjokerquestbot.domain.enums.StateGame;
 import by.semashko.greenjokerquestbot.domain.model.GameEngineModel;
 import by.semashko.greenjokerquestbot.domain.persistence.entity.Game;
 import by.semashko.greenjokerquestbot.infrastructure.rest.RestAPI;
+import by.semashko.greenjokerquestbot.infrastructure.scheduler.SchedulerTask;
 import by.semashko.greenjokerquestbot.infrastructure.service.impl.GameEngineModelService;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -17,14 +17,21 @@ import org.springframework.stereotype.Service;
 @Getter
 @Setter
 @Slf4j
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class WatchEngine implements Runnable {
 
     private RestAPI api;
     private UserService service;
     private GameEngineModelService gameEngineModelService;
 
+    private SchedulerTask task;
     private static Long telegramChatId;
+
+    @Autowired
+    public WatchEngine(RestAPI api, UserService service, GameEngineModelService gameEngineModelService) {
+        this.api = api;
+        this.service = service;
+        this.gameEngineModelService = gameEngineModelService;
+    }
 
     @Override
     @SneakyThrows
@@ -37,6 +44,7 @@ public class WatchEngine implements Runnable {
             GameEngineModel model = gameEngineModelService.requestGetModel(game.getDomain(), Integer.parseInt(game.getGameId()));
             gameEngineModelService.setModel(model);
             log.info(gameEngineModelService.getModel().getGameTitle());
+            task.execute();
         }
     }
 

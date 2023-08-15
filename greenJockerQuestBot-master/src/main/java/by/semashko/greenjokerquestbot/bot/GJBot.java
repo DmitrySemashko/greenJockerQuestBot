@@ -12,7 +12,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -20,6 +19,7 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.Serializable;
@@ -52,11 +52,7 @@ public class GJBot extends TelegramLongPollingBot {
         this.scheduler = scheduler;
         this.service = service;
         this.trigger = trigger;
-        try {
-            onUpdateReceivedEngine();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
+        startEngine();
     }
 
     @Override
@@ -85,35 +81,36 @@ public class GJBot extends TelegramLongPollingBot {
 
     }
 
-    private void startWatchEngine() {
-        scheduler.scheduleRequestServer(engine, trigger);
+    private void startEngine() {
+        scheduler.startWatchEngine(() -> {
+            try {
+                onUpdateReceivedEngine();
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }, engine, trigger);
     }
 
-
     private synchronized void onUpdateReceivedEngine() throws ExecutionException, InterruptedException {
-        startWatchEngine();
         GameEngineModelService service = engine.getGameEngineModelService();
         if (service.getModel() != null) {
             int event = service.getModel().getEvent();
             StateGame stateGame = service.setStateGames(event);
             if (stateGame == StateGame.ACTIVE) {
-                if (service.getModel().getLevel().isPassed()){
-                    Update update = new Update();
-                    update.setMessage(new Message());
-                    update.getMessage().setText("next level");
-                    PartialBotApiMethod<? extends Serializable> responseToUser = updateReceiver.handleUpdate(update);
-                    if (responseToUser instanceof BotApiMethod) {
-                        try {
-                            execute((BotApiMethod<? extends Serializable>) responseToUser);
-                        } catch (TelegramApiException e) {
-                            e.printStackTrace();
-                        }
+                Update update = new Update();
+                update.setMessage(new Message());
+                update.getMessage().setFrom(new User());
+                update.getMessage().getFrom().setId(chatId);
+                update.getMessage().setText("next level");
+                PartialBotApiMethod<? extends Serializable> responseToUser = updateReceiver.handleUpdate(update);
+                if (responseToUser instanceof BotApiMethod) {
+                    try {
+                        execute((BotApiMethod<? extends Serializable>) responseToUser);
+                    } catch (TelegramApiException e) {
+                        e.printStackTrace();
                     }
-
                 }
             }
-        }else {
-            wait(35);
         }
     }
 

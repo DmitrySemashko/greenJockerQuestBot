@@ -15,8 +15,17 @@ public class GameScheduler {
 
     private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
-    public void scheduleRequestServer(WatchEngine engine, PeriodicTrigger trigger){
-        threadPoolTaskScheduler.schedule(engine,trigger);
+
+    public void startWatchEngine(SchedulerTask task, WatchEngine engine, PeriodicTrigger trigger) {
+        engine.setTask(task);
+        scheduleRequestServer(engine, trigger);
+
+
+
+    }
+
+    private void scheduleRequestServer(WatchEngine engine, PeriodicTrigger trigger) {
+        threadPoolTaskScheduler.schedule(engine, trigger);
     }
 
 }

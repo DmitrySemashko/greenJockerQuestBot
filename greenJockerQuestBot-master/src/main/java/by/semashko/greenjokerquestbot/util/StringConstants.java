@@ -1,10 +1,9 @@
 package by.semashko.greenjokerquestbot.util;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public final class StringConstants {
-
-    private StringConstants(){
-
-    }
 
     public static final String LOGIN = "Login";
     public static final String PASSWORD = "Password";
